@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SignUpController">
+    <AnchorPane layoutY="100.0" prefHeight="300.0" prefWidth="700.0" style="-fx-background-color: white;">
+        <TextField fx:id="firstName" layoutX="95.0" layoutY="30.0" prefHeight="31.0" prefWidth="208.0" promptText="Имя">
+            <font>
+                <Font name="Georgia" size="16.0" />
+            </font>
+        </TextField>
+        <TextField fx:id="username" layoutX="95.0" layoutY="80.0" promptText="Логин">
+            <font>
+                <Font name="Georgia" size="16.0" />
+            </font>
+        </TextField>
+        <Button fx:id="signUp" layoutX="113.0" layoutY="230.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="Зарегистрироваться">
+            <font>
+                <Font name="Georgia" size="16.0" />
+            </font>
+        </Button>
+      <TextField fx:id="lastName" layoutX="400.0" layoutY="30.0" prefHeight="31.0" prefWidth="208.0" promptText="Фамилия">
+         <font>
+            <Font name="Georgia" size="16.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="email" layoutX="400.0" layoutY="80.0" promptText="Эл. почта">
+         <font>
+            <Font name="Georgia" size="16.0" />
+         </font>
+      </TextField>
+      <PasswordField fx:id="password" layoutX="95.0" layoutY="130.0" promptText="Пароль">
+         <font>
+            <Font name="Georgia" size="16.0" />
+         </font>
+      </PasswordField>
+      <PasswordField fx:id="confirmedPassword" layoutX="95.0" layoutY="180.0" promptText="Повторите пароль">
+         <font>
+            <Font name="Georgia" size="16.0" />
+         </font>
+      </PasswordField>
+      <ImageView fx:id="avatar" fitHeight="120.0" fitWidth="120.0" layoutX="444.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="previous" layoutX="364.0" layoutY="180.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="Пред.">
+         <font>
+            <Font name="Georgia" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="next" layoutX="577.0" layoutY="180.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="След.">
+         <font>
+            <Font name="Georgia" size="16.0" />
+         </font>
+      </Button>
+    </AnchorPane>
+    <Button fx:id="back" layoutX="63.0" layoutY="36.0" mnemonicParsing="false" text="Назад">
+        <font>
+            <Font name="Georgia" size="17.0" />
+        </font>
+    </Button>
+    <Button fx:id="exit" layoutX="563.0" layoutY="36.0" mnemonicParsing="false" text="Выход">
+        <font>
+            <Font name="Georgia" size="17.0" />
+        </font>
+    </Button>
+   <Button fx:id="index" layoutX="188.0" layoutY="24.0" mnemonicParsing="false" style="-fx-background-color: black;" text="Мебельная фабрика" textFill="WHITE">
+      <font>
+         <Font name="Georgia" size="30.0" />
+      </font>
+   </Button>
+</AnchorPane>

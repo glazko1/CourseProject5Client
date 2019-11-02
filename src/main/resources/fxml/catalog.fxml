@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CatalogController">
+    <AnchorPane layoutY="100.0" prefHeight="300.0" prefWidth="700.0" style="-fx-background-color: white;">
+      <children>
+         <TableView fx:id="productTable" layoutX="5.0" layoutY="92.0" prefHeight="202.0" prefWidth="330.0">
+           <columns>
+             <TableColumn fx:id="nameColumn" prefWidth="189.0" text="Название" />
+             <TableColumn fx:id="departmentColumn" prefWidth="140.0" text="Отдел" />
+           </columns>
+         </TableView>
+         <Button fx:id="addProduct" layoutX="90.0" layoutY="4.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="Добавить">
+            <font>
+               <Font name="Georgia" size="14.0" />
+            </font>
+         </Button>
+         <Button fx:id="editProduct" layoutX="174.0" layoutY="4.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="Изменить">
+            <font>
+               <Font name="Georgia" size="14.0" />
+            </font>
+         </Button>
+         <Button fx:id="deleteProduct" layoutX="262.0" layoutY="4.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="Удалить">
+            <font>
+               <Font name="Georgia" size="14.0" />
+            </font>
+         </Button>
+         <Button fx:id="refresh" layoutX="4.0" layoutY="4.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="Обновить">
+            <font>
+               <Font name="Georgia" size="14.0" />
+            </font>
+         </Button>
+         <ImageView fx:id="image" fitHeight="190.0" fitWidth="300.0" layoutX="366.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true" />
+         <Text fx:id="name" layoutX="338.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="357.0">
+            <font>
+               <Font name="Georgia" size="20.0" />
+            </font>
+         </Text>
+         <Text fx:id="price" fill="RED" layoutX="391.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="100.0">
+            <font>
+               <Font name="Georgia" size="30.0" />
+            </font>
+         </Text>
+         <Button fx:id="toBasket" layoutX="528.0" layoutY="248.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="В корзину">
+            <font>
+               <Font name="Georgia" size="20.0" />
+            </font>
+         </Button>
+         <Slider fx:id="priceMax" layoutX="18.0" layoutY="56.0" max="200.0" minorTickCount="10" prefHeight="38.0" prefWidth="180.0" showTickLabels="true" showTickMarks="true" value="200.0" />
+         <Text layoutX="55.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Цена (max)">
+            <font>
+               <Font name="Georgia" size="20.0" />
+            </font>
+         </Text>
+         <Button fx:id="categories" layoutX="220.0" layoutY="33.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="Категории">
+            <font>
+               <Font name="Georgia" size="14.0" />
+            </font>
+         </Button>
+         <Button fx:id="filter" layoutX="216.0" layoutY="62.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="Показать: 0">
+            <font>
+               <Font name="Georgia" size="14.0" />
+            </font>
+         </Button>
+      </children>
+    </AnchorPane>
+    <Button fx:id="basket" layoutX="58.0" layoutY="36.0" mnemonicParsing="false" text="Корзина">
+        <font>
+            <Font name="Georgia" size="17.0" />
+        </font>
+    </Button>
+    <Button fx:id="back" layoutX="563.0" layoutY="36.0" mnemonicParsing="false" text="Назад">
+        <font>
+            <Font name="Georgia" size="17.0" />
+        </font>
+    </Button>
+   <Button fx:id="main" layoutX="222.0" layoutY="25.0" mnemonicParsing="false" style="-fx-background-color: black;" text="Электротовары" textFill="WHITE">
+      <font>
+         <Font name="Georgia" size="30.0" />
+      </font>
+   </Button>
+</AnchorPane>
