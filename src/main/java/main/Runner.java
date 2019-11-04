@@ -18,7 +18,7 @@ import java.net.Socket;
 public class Runner extends Application implements Runnable {
 
     private static Socket socket;
-    private static String userId;
+    private static int userId;
     private static String username;
     private static UserStatus status;
 
@@ -68,11 +68,11 @@ public class Runner extends Application implements Runnable {
         throw new RuntimeException();
     }
 
-    public static String getUserId() {
+    public static int getUserId() {
         return userId;
     }
 
-    public static void setUserId(String userId) {
+    public static void setUserId(int userId) {
         Runner.userId = userId;
     }
 

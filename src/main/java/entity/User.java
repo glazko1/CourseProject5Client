@@ -2,7 +2,7 @@ package entity;
 
 public class User {
 
-    private String userId;
+    private int userId;
     private String username;
     private String firstName;
     private String lastName;
@@ -11,7 +11,7 @@ public class User {
     private boolean banned;
     private int avatarNumber;
 
-    public User(String userId, String username, String firstName, String lastName, UserStatus userStatus, String email, boolean banned, int avatarNumber) {
+    public User(int userId, String username, String firstName, String lastName, UserStatus userStatus, String email, boolean banned, int avatarNumber) {
         this.userId = userId;
         this.username = username;
         this.firstName = firstName;
@@ -22,11 +22,11 @@ public class User {
         this.avatarNumber = avatarNumber;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 

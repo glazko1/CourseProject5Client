@@ -126,7 +126,7 @@ public class BasketController {
     }
 
     private void addProduct() {
-        String productId = productTable.getSelectionModel()
+        int productId = productTable.getSelectionModel()
                 .selectedItemProperty()
                 .getValue()
                 .getProductId();
@@ -139,7 +139,7 @@ public class BasketController {
     }
 
     private void removeProduct() {
-        String productId = productTable.getSelectionModel()
+        int productId = productTable.getSelectionModel()
                 .selectedItemProperty()
                 .getValue()
                 .getProductId();

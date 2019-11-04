@@ -2,23 +2,20 @@ package entity.property;
 
 import entity.Department;
 import entity.Product;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 import java.util.Objects;
 
 public class ProductProperty {
 
-    private StringProperty productId;
+    private IntegerProperty productId;
     private StringProperty productName;
     private Department department;
     private StringProperty imagePath;
     private DoubleProperty price;
 
-    public ProductProperty(String productId, String productName, Department department, String imagePath, double price) {
-        this.productId = new SimpleStringProperty(productId);
+    public ProductProperty(int productId, String productName, Department department, String imagePath, double price) {
+        this.productId = new SimpleIntegerProperty(productId);
         this.productName = new SimpleStringProperty(productName);
         this.department = department;
         this.imagePath = new SimpleStringProperty(imagePath);
@@ -26,22 +23,22 @@ public class ProductProperty {
     }
 
     public ProductProperty(Product product) {
-        this.productId = new SimpleStringProperty(product.getProductId());
+        this.productId = new SimpleIntegerProperty(product.getProductId());
         this.productName = new SimpleStringProperty(product.getProductName());
         this.department = product.getDepartment();
         this.imagePath = new SimpleStringProperty(product.getImagePath());
         this.price = new SimpleDoubleProperty(product.getPrice());
     }
 
-    public String getProductId() {
+    public int getProductId() {
         return productId.get();
     }
 
-    public StringProperty productIdProperty() {
+    public IntegerProperty productIdProperty() {
         return productId;
     }
 
-    public void setProductId(String productId) {
+    public void setProductId(int productId) {
         this.productId.set(productId);
     }
 

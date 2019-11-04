@@ -50,7 +50,7 @@ public class MainController {
         });
         back.setOnAction(event -> {
             Runner.setStatus(null);
-            Runner.setUserId(null);
+            Runner.setUserId(-1);
             Runner.setUsername(null);
             back.getScene().getWindow().hide();
             sceneChanger.changeScene("/fxml/index.fxml");

@@ -23,7 +23,7 @@ public class MapParser {
     private ObjectMapper mapper = new ObjectMapper();
 
     public User user(Map<String, Object> map) {
-        return new User(map.get("userId").toString(), map.get("username").toString(), map.get("firstName").toString(),
+        return new User((int) map.get("userId"), map.get("username").toString(), map.get("firstName").toString(),
                 map.get("lastName").toString(), userStatus((Map<String, Object>) map.get("userStatus")),
                 map.get("email").toString(), (boolean) map.get("banned"), (int) map.get("avatarNumber"));
     }
@@ -42,7 +42,7 @@ public class MapParser {
     }
 
     public Product product(Map<String, Object> map) {
-        return new Product(map.get("productId").toString(), map.get("productName").toString(),
+        return new Product((int) map.get("productId"), map.get("productName").toString(),
                 department((Map<String, Object>) map.get("department")), map.get("imagePath").toString(),
                 (double) map.get("price"));
     }

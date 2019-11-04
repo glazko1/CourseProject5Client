@@ -2,13 +2,13 @@ package entity;
 
 public class Product {
 
-    private String productId;
+    private int productId;
     private String productName;
     private Department department;
     private String imagePath;
     private double price;
 
-    public Product(String productId, String productName, Department department, String imagePath, double price) {
+    public Product(int productId, String productName, Department department, String imagePath, double price) {
         this.productId = productId;
         this.productName = productName;
         this.department = department;
@@ -16,11 +16,11 @@ public class Product {
         this.price = price;
     }
 
-    public String getProductId() {
+    public int getProductId() {
         return productId;
     }
 
-    public void setProductId(String productId) {
+    public void setProductId(int productId) {
         this.productId = productId;
     }
 
