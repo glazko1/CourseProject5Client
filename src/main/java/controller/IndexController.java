@@ -85,18 +85,4 @@ public class IndexController {
             alert.show();
         }
     }
-
-    private void sendImage(String path, String name) {
-        try {
-            File image = new File(path);
-            InputStream imageStream = new FileInputStream(image);
-            byte[] imageData = new byte[(int) image.length()];
-            imageStream.read(imageData);
-            String imageString = Base64.getEncoder().encodeToString(imageData);
-            imageStream.close();
-            Runner.sendData(new ClientRequest("sendImage", Map.of("image", imageString, "name", name)));
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-    }
 }

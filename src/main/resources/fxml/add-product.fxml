@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="250.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddProductController">
+    <Button fx:id="addProduct" layoutX="46.0" layoutY="200.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="Сохранить">
+        <font>
+            <Font name="Georgia" size="17.0" />
+        </font>
+    </Button>
+    <Button fx:id="cancel" layoutX="248.0" layoutY="200.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="Отмена">
+        <font>
+            <Font name="Georgia" size="17.0" />
+        </font>
+    </Button>
+   <TextField fx:id="productName" layoutX="25.0" layoutY="25.0" prefHeight="33.0" prefWidth="350.0" promptText="Название">
+      <font>
+         <Font name="Georgia" size="18.0" />
+      </font>
+   </TextField>
+   <ChoiceBox fx:id="department" layoutX="145.0" layoutY="76.0" prefHeight="25.0" prefWidth="230.0" />
+   <Text layoutX="35.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Категория">
+      <font>
+         <Font name="Georgia" size="18.0" />
+      </font>
+   </Text>
+   <Button fx:id="uploadFile" layoutX="25.0" layoutY="125.0" mnemonicParsing="false" text="Загрузить файл">
+      <font>
+         <Font name="Georgia" size="17.0" />
+      </font>
+   </Button>
+   <TextField fx:id="price" layoutX="205.0" layoutY="125.0" prefHeight="33.0" prefWidth="170.0" promptText="Цена">
+      <font>
+         <Font name="Georgia" size="18.0" />
+      </font>
+   </TextField>
+   <Text layoutX="25.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Файл:">
+      <font>
+         <Font name="Georgia" size="12.0" />
+      </font>
+   </Text>
+   <Text fx:id="filePath" layoutX="62.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="312.6015625">
+      <font>
+         <Font name="Georgia" size="12.0" />
+      </font>
+   </Text>
+</AnchorPane>

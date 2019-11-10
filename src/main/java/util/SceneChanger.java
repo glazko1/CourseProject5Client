@@ -30,4 +30,18 @@ public class SceneChanger {
         stage.setScene(new Scene(parent));
         stage.show();
     }
+
+    public void changeSceneAndWait(String url) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource(url));
+        try {
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Parent parent = loader.getRoot();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(parent));
+        stage.showAndWait();
+    }
 }

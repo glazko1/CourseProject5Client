@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class CatalogController {
 
@@ -36,6 +35,9 @@ public class CatalogController {
 
     @FXML
     private TableColumn<ProductProperty, String> departmentColumn;
+
+    @FXML
+    private TableColumn<ProductProperty, String> priceColumn;
 
     @FXML
     private Button addProduct;
@@ -79,6 +81,7 @@ public class CatalogController {
     @FXML
     private Button main;
 
+    private SceneChanger sceneChanger = SceneChanger.getInstance();
     private List<Product> products;
     private MapParser parser = MapParser.getInstance();
 
@@ -90,6 +93,11 @@ public class CatalogController {
             deleteProduct.setVisible(false);
         }
         fillProductTable();
+        addProduct.setOnAction(event -> {
+            sceneChanger.changeSceneAndWait("/fxml/add-product.fxml");
+            fillProductTable();
+        });
+        toBasket.setOnAction(event -> addToBasket());
         priceMax.valueProperty().addListener((observable, oldValue, newValue) -> countFilteredProducts(newValue.doubleValue()));
         basket.setOnAction(event -> {
             basket.getScene().getWindow().hide();
@@ -113,6 +121,7 @@ public class CatalogController {
         productTable.setItems(FXCollections.observableArrayList(productProperties));
         nameColumn.setCellValueFactory(cellData -> cellData.getValue().productNameProperty());
         departmentColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDepartment().getDepartmentName()));
+        priceColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.format("%.2f", cellData.getValue().getPrice())));
         showProductDetails(null);
         productTable.getSelectionModel()
                 .selectedItemProperty()
@@ -129,6 +138,18 @@ public class CatalogController {
             price.setText("");
             image.setImage(null);
         }
+    }
+
+    private void addToBasket() {
+        int productId = productTable.getSelectionModel()
+                .selectedItemProperty()
+                .getValue()
+                .getProductId();
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", Runner.getUserId());
+        map.put("productId", productId);
+        Runner.sendData(new ClientRequest("addProductToBasket", map));
+        Runner.getData();
     }
 
     private void countFilteredProducts(double price) {
