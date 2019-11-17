@@ -83,6 +83,7 @@ public class BasketController {
         makeOrder.setOnAction(event -> {
             if (checkProductsAmount()) {
                 SceneChanger.getInstance().changeSceneAndWait("/fxml/make-order.fxml");
+                fillProductTable();
             } else {
                 Alert alert = new Alert(ERROR, "Вы выбрали слишком большое количество товара! Повторите попытку позже.");
                 alert.show();
