@@ -18,7 +18,7 @@
                <TableColumn fx:id="numberColumn" prefWidth="50.0" text="Кол-во" />
                 </columns>
             </TableView>
-            <ImageView fx:id="image" fitHeight="190.0" fitWidth="300.0" layoutX="366.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="image" fitHeight="200.0" fitWidth="200.0" layoutX="417.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
             <Text fx:id="name" layoutX="338.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="357.0">
                 <font>
                     <Font name="Georgia" size="20.0" />

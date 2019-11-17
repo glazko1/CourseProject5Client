@@ -7,13 +7,15 @@ public class Product {
     private Department department;
     private String imagePath;
     private double price;
+    private int amount;
 
-    public Product(int productId, String productName, Department department, String imagePath, double price) {
+    public Product(int productId, String productName, Department department, String imagePath, double price, int amount) {
         this.productId = productId;
         this.productName = productName;
         this.department = department;
         this.imagePath = imagePath;
         this.price = price;
+        this.amount = amount;
     }
 
     public int getProductId() {
@@ -54,5 +56,13 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 }

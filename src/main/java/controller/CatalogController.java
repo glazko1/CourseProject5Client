@@ -2,28 +2,23 @@ package controller;
 
 import cooperation.ClientRequest;
 import cooperation.ServerResponse;
+import entity.Department;
 import entity.Product;
 import entity.property.ProductProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import main.Runner;
 import util.MapParser;
 import util.SceneChanger;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class CatalogController {
 
@@ -37,7 +32,7 @@ public class CatalogController {
     private TableColumn<ProductProperty, String> departmentColumn;
 
     @FXML
-    private TableColumn<ProductProperty, String> priceColumn;
+    private TableColumn<ProductProperty, Double> priceColumn;
 
     @FXML
     private Button addProduct;
@@ -47,9 +42,6 @@ public class CatalogController {
 
     @FXML
     private Button deleteProduct;
-
-    @FXML
-    private Button refresh;
 
     @FXML
     private ImageView image;
@@ -73,6 +65,24 @@ public class CatalogController {
     private Button filter;
 
     @FXML
+    private AnchorPane categoriesPane;
+
+    @FXML
+    private CheckBox category1;
+
+    @FXML
+    private CheckBox category2;
+
+    @FXML
+    private CheckBox category3;
+
+    @FXML
+    private CheckBox category4;
+
+    @FXML
+    private CheckBox category5;
+
+    @FXML
     private Button basket;
 
     @FXML
@@ -83,6 +93,7 @@ public class CatalogController {
 
     private SceneChanger sceneChanger = SceneChanger.getInstance();
     private List<Product> products;
+    private List<String> departments;
     private MapParser parser = MapParser.getInstance();
 
     @FXML
@@ -99,9 +110,19 @@ public class CatalogController {
         });
         toBasket.setOnAction(event -> addToBasket());
         priceMax.valueProperty().addListener((observable, oldValue, newValue) -> countFilteredProducts(newValue.doubleValue()));
+        categories.setOnAction(event -> editCategoriesPane());
+        filter.setOnAction(event -> filterProducts(priceMax.getValue()));
         basket.setOnAction(event -> {
             basket.getScene().getWindow().hide();
             SceneChanger.getInstance().changeScene("/fxml/basket.fxml");
+        });
+        back.setOnAction(event -> {
+            back.getScene().getWindow().hide();
+            SceneChanger.getInstance().changeScene("/fxml/main.fxml");
+        });
+        main.setOnAction(event -> {
+            main.getScene().getWindow().hide();
+            SceneChanger.getInstance().changeScene("/fxml/main.fxml");
         });
     }
 
@@ -121,7 +142,7 @@ public class CatalogController {
         productTable.setItems(FXCollections.observableArrayList(productProperties));
         nameColumn.setCellValueFactory(cellData -> cellData.getValue().productNameProperty());
         departmentColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDepartment().getDepartmentName()));
-        priceColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.format("%.2f", cellData.getValue().getPrice())));
+        priceColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getPrice()).asObject());
         showProductDetails(null);
         productTable.getSelectionModel()
                 .selectedItemProperty()
@@ -155,6 +176,7 @@ public class CatalogController {
     private void countFilteredProducts(double price) {
         int number = (int) products.stream()
                 .filter(product -> product.getPrice() < price)
+                .filter(product -> departments.contains(product.getDepartment().getDepartmentName()))
                 .count();
         filter.setText(filter.getText().replaceAll("[0-9]+", String.valueOf(number)));
     }
@@ -163,7 +185,44 @@ public class CatalogController {
         List<ProductProperty> productProperties = new ArrayList<>();
         products.stream()
                 .filter(product -> product.getPrice() < price)
+                .filter(product -> departments.contains(product.getDepartment().getDepartmentName()))
                 .forEach(product -> productProperties.add(new ProductProperty(product)));
         productTable.setItems(FXCollections.observableArrayList(productProperties));
+    }
+
+    private void editCategoriesPane() {
+        List<CheckBox> checkBoxes = new ArrayList<>();
+        Collections.addAll(checkBoxes, category1, category2, category3, category4, category5);
+        if (categoriesPane.isVisible()) {
+            categoriesPane.setVisible(false);
+            departments = new ArrayList<>();
+            for (CheckBox checkBox : checkBoxes) {
+                if (checkBox.isSelected()) {
+                    departments.add(checkBox.getText());
+                }
+                countFilteredProducts(priceMax.getValue());
+                checkBox.setVisible(false);
+                checkBox.setText("");
+            }
+        } else {
+            int index = 0;
+            for (Department department : getDepartments()) {
+                CheckBox category = checkBoxes.get(index);
+                category.setVisible(true);
+                category.setText(department.getDepartmentName());
+                ++index;
+            }
+            categoriesPane.setVisible(true);
+        }
+    }
+
+    private List<Department> getDepartments() {
+        Runner.sendData(new ClientRequest("getAllDepartments", new HashMap<>()));
+        ServerResponse response = Runner.getData();
+        if (!response.isError()) {
+            Map<String, Object> departmentMap = response.getData();
+            return parser.departments(departmentMap);
+        }
+        return new ArrayList<>();
     }
 }

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MakeOrderController">
+    <Button fx:id="makeOrder" layoutX="56.0" layoutY="250.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="Отправить">
+        <font>
+            <Font name="Georgia" size="17.0" />
+        </font>
+    </Button>
+    <Button fx:id="cancel" layoutX="248.0" layoutY="250.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="Отмена">
+        <font>
+            <Font name="Georgia" size="17.0" />
+        </font>
+    </Button>
+    <TextField fx:id="locality" layoutX="25.0" layoutY="100.0" prefHeight="33.0" prefWidth="350.0" promptText="Населенный пункт">
+        <font>
+            <Font name="Georgia" size="18.0" />
+        </font>
+    </TextField>
+    <ChoiceBox fx:id="region" layoutX="145.0" layoutY="55.0" prefHeight="25.0" prefWidth="230.0" />
+    <Text layoutX="33.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Область">
+        <font>
+            <Font name="Georgia" size="18.0" />
+        </font>
+    </Text>
+    <TextField fx:id="flat" layoutX="205.0" layoutY="200.0" prefHeight="33.0" prefWidth="170.0" promptText="Квартира">
+        <font>
+            <Font name="Georgia" size="18.0" />
+        </font>
+    </TextField>
+   <TextField fx:id="street" layoutX="25.0" layoutY="150.0" prefHeight="33.0" prefWidth="350.0" promptText="Улица">
+      <font>
+         <Font name="Georgia" size="18.0" />
+      </font>
+   </TextField>
+   <TextField fx:id="house" layoutX="25.0" layoutY="200.0" prefHeight="33.0" prefWidth="170.0" promptText="Дом">
+      <font>
+         <Font name="Georgia" size="18.0" />
+      </font>
+   </TextField>
+   <Text layoutX="110.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Адрес доставки">
+      <font>
+         <Font name="Georgia" size="25.0" />
+      </font>
+   </Text>
+</AnchorPane>

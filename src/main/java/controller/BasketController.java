@@ -1,14 +1,13 @@
 package controller;
 
-
 import cooperation.ClientRequest;
 import cooperation.ServerResponse;
 import entity.Product;
 import entity.property.ProductProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -20,6 +19,8 @@ import util.MapParser;
 import util.SceneChanger;
 
 import java.util.*;
+
+import static javafx.scene.control.Alert.AlertType.ERROR;
 
 public class BasketController {
 
@@ -63,6 +64,7 @@ public class BasketController {
     private Button makeOrder;
 
     private List<Product> products;
+    private Map<ProductProperty, Integer> productProperties;
     private MapParser parser = MapParser.getInstance();
 
     @FXML
@@ -77,6 +79,14 @@ public class BasketController {
         main.setOnAction(event -> {
             main.getScene().getWindow().hide();
             SceneChanger.getInstance().changeScene("/fxml/main.fxml");
+        });
+        makeOrder.setOnAction(event -> {
+            if (checkProductsAmount()) {
+                SceneChanger.getInstance().changeSceneAndWait("/fxml/make-order.fxml");
+            } else {
+                Alert alert = new Alert(ERROR, "Вы выбрали слишком большое количество товара! Повторите попытку позже.");
+                alert.show();
+            }
         });
     }
 
@@ -93,7 +103,7 @@ public class BasketController {
 
     private void fillProductTable() {
         getProducts();
-        Map<ProductProperty, Integer> productProperties = new HashMap<>();
+        productProperties = new HashMap<>();
         products.forEach(product -> {
             ProductProperty productProperty = new ProductProperty(product);
             if (productProperties.containsKey(productProperty)) {
@@ -149,5 +159,15 @@ public class BasketController {
         Runner.sendData(new ClientRequest("removeProductFromBasket", map));
         Runner.getData();
         fillProductTable();
+    }
+
+    private boolean checkProductsAmount() {
+        final boolean[] correct = {true};
+        productProperties.forEach((product, amount) -> {
+            if (amount > product.getAmount()) {
+                correct[0] = false;
+            }
+        });
+        return correct[0];
     }
 }

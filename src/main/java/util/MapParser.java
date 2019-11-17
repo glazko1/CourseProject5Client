@@ -44,7 +44,16 @@ public class MapParser {
     public Product product(Map<String, Object> map) {
         return new Product((int) map.get("productId"), map.get("productName").toString(),
                 department((Map<String, Object>) map.get("department")), map.get("imagePath").toString(),
-                (double) map.get("price"));
+                (double) map.get("price"), (int) map.get("amount"));
+    }
+
+    public List<Department> departments(Map<String, Object> map) {
+        List<Department> departments = new ArrayList<>();
+        List departmentData = (List) map.get("departments");
+        for (Map<String, Object> department : (List<Map<String, Object>>) departmentData) {
+            departments.add(department(department));
+        }
+        return departments;
     }
 
     public Department department(Map<String, Object> map) {

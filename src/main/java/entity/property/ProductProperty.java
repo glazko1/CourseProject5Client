@@ -13,13 +13,15 @@ public class ProductProperty {
     private Department department;
     private StringProperty imagePath;
     private DoubleProperty price;
+    private IntegerProperty amount;
 
-    public ProductProperty(int productId, String productName, Department department, String imagePath, double price) {
+    public ProductProperty(int productId, String productName, Department department, String imagePath, double price, int amount) {
         this.productId = new SimpleIntegerProperty(productId);
         this.productName = new SimpleStringProperty(productName);
         this.department = department;
         this.imagePath = new SimpleStringProperty(imagePath);
         this.price = new SimpleDoubleProperty(price);
+        this.amount = new SimpleIntegerProperty(amount);
     }
 
     public ProductProperty(Product product) {
@@ -28,6 +30,7 @@ public class ProductProperty {
         this.department = product.getDepartment();
         this.imagePath = new SimpleStringProperty(product.getImagePath());
         this.price = new SimpleDoubleProperty(product.getPrice());
+        this.amount = new SimpleIntegerProperty(product.getAmount());
     }
 
     public int getProductId() {
@@ -84,6 +87,18 @@ public class ProductProperty {
 
     public void setPrice(double price) {
         this.price.set(price);
+    }
+
+    public int getAmount() {
+        return amount.get();
+    }
+
+    public IntegerProperty amountProperty() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount.set(amount);
     }
 
     @Override
