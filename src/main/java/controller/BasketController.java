@@ -69,7 +69,12 @@ public class BasketController {
 
     @FXML
     private void initialize() {
+        add.setVisible(false);
+        remove.setVisible(false);
         fillProductTable();
+        if (products.isEmpty()) {
+            makeOrder.setVisible(false);
+        }
         add.setOnAction(event -> addProduct());
         remove.setOnAction(event -> removeProduct());
         back.setOnAction(event -> {
@@ -130,10 +135,14 @@ public class BasketController {
             name.setText(productProperty.getProductName());
             price.setText(String.format("%.2f", productProperty.getPrice()));
             image.setImage(new Image(productProperty.getImagePath()));
+            add.setVisible(true);
+            remove.setVisible(true);
         } else {
             name.setText("");
             price.setText("");
             image.setImage(null);
+            add.setVisible(false);
+            remove.setVisible(false);
         }
     }
 
@@ -148,6 +157,9 @@ public class BasketController {
         Runner.sendData(new ClientRequest("addProductToBasket", map));
         Runner.getData();
         fillProductTable();
+        if (products.isEmpty()) {
+            makeOrder.setVisible(false);
+        }
     }
 
     private void removeProduct() {
@@ -161,6 +173,9 @@ public class BasketController {
         Runner.sendData(new ClientRequest("removeProductFromBasket", map));
         Runner.getData();
         fillProductTable();
+        if (products.isEmpty()) {
+            makeOrder.setVisible(false);
+        }
     }
 
     private boolean checkProductsAmount() {

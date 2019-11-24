@@ -67,12 +67,15 @@ public class AddProductController {
     private void addProduct() {
         String productNameText = productName.getText();
         String priceText = price.getText();
+        String amountText = amount.getText();
         String filePathText = filePath.getText();
-        if (validator.validate(productNameText, priceText, filePathText)) {
+        if (validator.validate(productNameText, priceText, amountText, filePathText) &&
+                !department.getSelectionModel().isEmpty()) {
             Map<String, Object> data = new HashMap<>();
             data.put("productName", productNameText);
             data.put("departmentId", department.getValue().getDepartmentId());
             data.put("price", Double.parseDouble(priceText));
+            data.put("amount", Integer.parseInt(amountText));
             Runner.sendData(new ClientRequest("addProduct", data));
             ServerResponse response = Runner.getData();
             if (!response.isError()) {

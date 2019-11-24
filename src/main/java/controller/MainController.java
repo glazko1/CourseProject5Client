@@ -36,7 +36,7 @@ public class MainController {
 
     @FXML
     private void initialize() {
-        if ("User".equals(Runner.getStatus().getStatusName())) {
+        if (!"Администратор".equals(Runner.getStatus().getStatusName())) {
             allOrders.setVisible(false);
             allUsers.setVisible(false);
         }
@@ -47,6 +47,10 @@ public class MainController {
         catalog.setOnAction(event -> {
             catalog.getScene().getWindow().hide();
             sceneChanger.changeScene("/fxml/catalog.fxml");
+        });
+        myProfile.setOnAction(event -> {
+            catalog.getScene().getWindow().hide();
+            sceneChanger.changeScene("/fxml/profile.fxml");
         });
         allOrders.setOnAction(event -> {
             allOrders.getScene().getWindow().hide();

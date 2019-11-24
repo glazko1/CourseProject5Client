@@ -93,16 +93,17 @@ public class CatalogController {
 
     private SceneChanger sceneChanger = SceneChanger.getInstance();
     private List<Product> products;
-    private List<String> departments;
+    private List<String> departments = new ArrayList<>();
     private MapParser parser = MapParser.getInstance();
 
     @FXML
     private void initialize() {
-        if ("User".equals(Runner.getStatus().getStatusName())) {
+        if (!"Администратор".equals(Runner.getStatus().getStatusName())) {
             addProduct.setVisible(false);
-            editProduct.setVisible(false);
-            deleteProduct.setVisible(false);
         }
+        editProduct.setVisible(false);
+        deleteProduct.setVisible(false);
+        toBasket.setVisible(false);
         fillProductTable();
         addProduct.setOnAction(event -> {
             sceneChanger.changeSceneAndWait("/fxml/add-product.fxml");
@@ -153,12 +154,25 @@ public class CatalogController {
     private void showProductDetails(ProductProperty productProperty) {
         if (productProperty != null) {
             name.setText(productProperty.getProductName());
-            price.setText(String.format("%.2f", productProperty.getPrice()));
             image.setImage(new Image(productProperty.getImagePath()));
+            if (productProperty.getAmount() > 0) {
+                price.setText(String.format("%.2f", productProperty.getPrice()));
+                toBasket.setVisible(true);
+            } else {
+                price.setText("Нет в наличии");
+                toBasket.setVisible(false);
+            }
+            if ("Администратор".equals(Runner.getStatus().getStatusName())) {
+                editProduct.setVisible(true);
+                deleteProduct.setVisible(true);
+            }
         } else {
             name.setText("");
             price.setText("");
             image.setImage(null);
+            editProduct.setVisible(false);
+            deleteProduct.setVisible(false);
+            toBasket.setVisible(false);
         }
     }
 
@@ -177,7 +191,12 @@ public class CatalogController {
     private void countFilteredProducts(double price) {
         int number = (int) products.stream()
                 .filter(product -> product.getPrice() < price)
-                .filter(product -> departments.contains(product.getDepartment().getDepartmentName()))
+                .filter(product -> {
+                    if (!departments.isEmpty()) {
+                        return departments.contains(product.getDepartment().getDepartmentName());
+                    }
+                    return true;
+                })
                 .count();
         filter.setText(filter.getText().replaceAll("[0-9]+", String.valueOf(number)));
     }
@@ -186,7 +205,12 @@ public class CatalogController {
         List<ProductProperty> productProperties = new ArrayList<>();
         products.stream()
                 .filter(product -> product.getPrice() < price)
-                .filter(product -> departments.contains(product.getDepartment().getDepartmentName()))
+                .filter(product -> {
+                    if (!departments.isEmpty()) {
+                        return departments.contains(product.getDepartment().getDepartmentName());
+                    }
+                    return true;
+                })
                 .forEach(product -> productProperties.add(new ProductProperty(product)));
         productTable.setItems(FXCollections.observableArrayList(productProperties));
     }
