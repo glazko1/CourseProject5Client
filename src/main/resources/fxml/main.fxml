@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
    <AnchorPane layoutY="100.0" prefHeight="300.0" prefWidth="700.0" style="-fx-background-color: white;">
-      <Button fx:id="myOrders" layoutX="500.0" layoutY="129.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="Мои заказы">
+      <Button fx:id="myOrders" layoutX="500.0" layoutY="130.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="Мои заказы">
          <font>
             <Font name="Georgia" size="17.0" />
          </font>
@@ -38,7 +38,7 @@
             <Font name="Georgia" size="17.0" />
          </font>
       </Button>
-      <Button fx:id="addNews" layoutX="476.0" layoutY="20.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="Добавить новость">
+      <Button fx:id="allOrders" layoutX="503.0" layoutY="20.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="Все заказы">
          <font>
             <Font name="Georgia" size="17.0" />
          </font>

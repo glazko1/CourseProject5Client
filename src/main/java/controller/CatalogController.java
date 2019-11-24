@@ -131,7 +131,8 @@ public class CatalogController {
         ServerResponse response = Runner.getData();
         if (!response.isError()) {
             Map<String, Object> productMap = response.getData();
-            products = parser.products(productMap);
+            List productData = (List) productMap.get("products");
+            products = parser.products(productData);
         }
     }
 
@@ -221,7 +222,8 @@ public class CatalogController {
         ServerResponse response = Runner.getData();
         if (!response.isError()) {
             Map<String, Object> departmentMap = response.getData();
-            return parser.departments(departmentMap);
+            List departmentData = (List) departmentMap.get("departments");
+            return parser.departments(departmentData);
         }
         return new ArrayList<>();
     }

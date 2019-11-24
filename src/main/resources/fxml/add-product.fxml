@@ -7,13 +7,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="250.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddProductController">
-    <Button fx:id="addProduct" layoutX="46.0" layoutY="200.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="Сохранить">
+<AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddProductController">
+    <Button fx:id="addProduct" layoutX="46.0" layoutY="250.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="Сохранить">
         <font>
             <Font name="Georgia" size="17.0" />
         </font>
     </Button>
-    <Button fx:id="cancel" layoutX="248.0" layoutY="200.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="Отмена">
+    <Button fx:id="cancel" layoutX="248.0" layoutY="250.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="Отмена">
         <font>
             <Font name="Georgia" size="17.0" />
         </font>
@@ -49,4 +49,9 @@
          <Font name="Georgia" size="12.0" />
       </font>
    </Text>
+   <TextField fx:id="amount" layoutX="77.0" layoutY="201.0" prefHeight="33.0" prefWidth="247.0" promptText="Количество на складе">
+      <font>
+         <Font name="Georgia" size="18.0" />
+      </font>
+   </TextField>
 </AnchorPane>

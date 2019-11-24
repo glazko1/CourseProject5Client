@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OrderController">
+    <AnchorPane prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: white;">
+        <children>
+            <TableView fx:id="productTable" layoutX="5.0" layoutY="106.0" prefHeight="232.0" prefWidth="330.0">
+                <columns>
+                    <TableColumn fx:id="nameColumn" prefWidth="160.0" text="Название" />
+                    <TableColumn fx:id="departmentColumn" prefWidth="120.0" text="Отдел" />
+                    <TableColumn fx:id="numberColumn" prefWidth="50.0" text="Кол-во" />
+                </columns>
+            </TableView>
+            <ImageView fx:id="image" fitHeight="200.0" fitWidth="200.0" layoutX="417.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true" />
+            <Text fx:id="name" layoutX="338.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="357.0">
+                <font>
+                    <Font name="Georgia" size="20.0" />
+                </font>
+            </Text>
+            <Text fx:id="price" fill="RED" layoutX="467.0" layoutY="377.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="100.0">
+                <font>
+                    <Font name="Georgia" size="30.0" />
+                </font>
+            </Text>
+            <Text layoutX="53.0" layoutY="377.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Сумма:" textAlignment="CENTER" wrappingWidth="108.0">
+                <font>
+                    <Font name="Georgia" size="30.0" />
+                </font>
+            </Text>
+            <Text fx:id="sum" layoutX="164.0" layoutY="377.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="110.0">
+                <font>
+                    <Font name="Georgia" size="30.0" />
+                </font>
+            </Text>
+         <Text layoutX="11.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Дата и время:" wrappingWidth="173.0">
+            <font>
+               <Font name="Georgia" size="25.0" />
+            </font>
+         </Text>
+         <Text fx:id="dateTime" layoutX="184.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="285.0">
+            <font>
+               <Font name="Georgia" size="25.0" />
+            </font>
+         </Text>
+         <Text fx:id="status" layoutX="496.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="180.0">
+            <font>
+               <Font name="Georgia" size="25.0" />
+            </font>
+         </Text>
+         <Text layoutX="11.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Адрес доставки:" wrappingWidth="173.0">
+            <font>
+               <Font name="Georgia" size="20.0" />
+            </font>
+         </Text>
+         <Text fx:id="address" layoutX="184.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="500.0">
+            <font>
+               <Font name="Georgia" size="20.0" />
+            </font>
+         </Text>
+        </children>
+    </AnchorPane>
+</AnchorPane>

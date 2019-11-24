@@ -46,6 +46,9 @@ public class AddProductController {
     private TextField price;
 
     @FXML
+    private TextField amount;
+
+    @FXML
     private Text filePath;
 
     private MapParser parser = MapParser.getInstance();
@@ -103,7 +106,8 @@ public class AddProductController {
         ServerResponse response = Runner.getData();
         if (!response.isError()) {
             Map<String, Object> departmentMap = response.getData();
-            List<Department> departments = parser.departments(departmentMap);
+            List departmentData = (List) departmentMap.get("departments");
+            List<Department> departments = parser.departments(departmentData);
             department.setItems(FXCollections.observableArrayList(departments));
         }
     }

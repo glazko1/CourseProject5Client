@@ -24,7 +24,7 @@ public class MainController {
     private Button allUsers;
 
     @FXML
-    private Button addNews;
+    private Button allOrders;
 
     @FXML
     private Button basket;
@@ -37,12 +37,20 @@ public class MainController {
     @FXML
     private void initialize() {
         if ("User".equals(Runner.getStatus().getStatusName())) {
-            addNews.setVisible(false);
+            allOrders.setVisible(false);
             allUsers.setVisible(false);
         }
+        myOrders.setOnAction(event -> {
+            myOrders.getScene().getWindow().hide();
+            sceneChanger.changeScene("/fxml/my-orders.fxml");
+        });
         catalog.setOnAction(event -> {
             catalog.getScene().getWindow().hide();
             sceneChanger.changeScene("/fxml/catalog.fxml");
+        });
+        allOrders.setOnAction(event -> {
+            allOrders.getScene().getWindow().hide();
+            sceneChanger.changeScene("/fxml/all-orders.fxml");
         });
         basket.setOnAction(event -> {
             basket.getScene().getWindow().hide();

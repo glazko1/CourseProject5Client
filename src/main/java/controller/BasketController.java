@@ -98,7 +98,8 @@ public class BasketController {
         ServerResponse response = Runner.getData();
         if (!response.isError()) {
             Map<String, Object> productMap = response.getData();
-            products = parser.products(productMap);
+            List productData = (List) productMap.get("products");
+            products = parser.products(productData);
         }
     }
 
