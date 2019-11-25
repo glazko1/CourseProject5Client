@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="300.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ChangeEmailController">
+      <Button fx:id="save" layoutX="60.0" layoutY="180.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="Сохранить">
+         <font>
+            <Font name="Georgia" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="cancel" layoutX="237.0" layoutY="180.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="Отмена">
+         <font>
+            <Font name="Georgia" size="16.0" />
+         </font>
+      </Button>
+      <TextField fx:id="newEmail" layoutX="80.0" layoutY="118.0" promptText="Новый адрес эл. почты">
+         <font>
+            <Font name="Georgia" size="17.0" />
+         </font>
+      </TextField>
+</AnchorPane>

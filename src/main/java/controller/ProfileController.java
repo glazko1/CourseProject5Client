@@ -57,9 +57,15 @@ public class ProfileController {
     @FXML
     private void initialize() {
         fillInformation();
-        changeAvatar.setOnAction(event -> SceneChanger.getInstance().changeScene("/fxml/change-avatar.fxml"));
+        changeAvatar.setOnAction(event -> {
+            SceneChanger.getInstance().changeSceneAndWait("/fxml/change-avatar.fxml");
+            fillInformation();
+        });
         changePassword.setOnAction(event -> SceneChanger.getInstance().changeScene("/fxml/change-password.fxml"));
-        changeEmail.setOnAction(event -> SceneChanger.getInstance().changeScene("/fxml/change-email.fxml"));
+        changeEmail.setOnAction(event -> {
+            SceneChanger.getInstance().changeSceneAndWait("/fxml/change-email.fxml");
+            fillInformation();
+        });
         back.setOnAction(event -> {
             back.getScene().getWindow().hide();
             SceneChanger.getInstance().changeScene("/fxml/main.fxml");
