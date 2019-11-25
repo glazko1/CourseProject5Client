@@ -20,6 +20,14 @@ public class MapParser {
 
     private ObjectMapper mapper = new ObjectMapper();
 
+    public List<User> users(List userData) {
+        List<User> users = new ArrayList<>();
+        for (Map<String, Object> user : (List<Map<String, Object>>) userData) {
+            users.add(user(user));
+        }
+        return users;
+    }
+
     public User user(Map<String, Object> map) {
         return new User((int) map.get("userId"), (String) map.get("username"), (String) map.get("firstName"),
                 (String) map.get("lastName"), userStatus((Map<String, Object>) map.get("userStatus")),

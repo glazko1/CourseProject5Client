@@ -52,6 +52,10 @@ public class MainController {
             catalog.getScene().getWindow().hide();
             sceneChanger.changeScene("/fxml/profile.fxml");
         });
+        allUsers.setOnAction(event -> {
+            allOrders.getScene().getWindow().hide();
+            sceneChanger.changeScene("/fxml/users.fxml");
+        });
         allOrders.setOnAction(event -> {
             allOrders.getScene().getWindow().hide();
             sceneChanger.changeScene("/fxml/all-orders.fxml");

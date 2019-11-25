@@ -20,6 +20,8 @@ import util.SceneChanger;
 
 import java.util.*;
 
+import static javafx.scene.control.Alert.AlertType.ERROR;
+
 public class CatalogController {
 
     @FXML
@@ -109,6 +111,10 @@ public class CatalogController {
             sceneChanger.changeSceneAndWait("/fxml/add-product.fxml");
             fillProductTable();
         });
+        deleteProduct.setOnAction(event -> {
+            deleteProduct();
+            fillProductTable();
+        });
         toBasket.setOnAction(event -> addToBasket());
         priceMax.valueProperty().addListener((observable, oldValue, newValue) -> countFilteredProducts(newValue.doubleValue()));
         categories.setOnAction(event -> editCategoriesPane());
@@ -173,6 +179,21 @@ public class CatalogController {
             editProduct.setVisible(false);
             deleteProduct.setVisible(false);
             toBasket.setVisible(false);
+        }
+    }
+
+    private void deleteProduct() {
+        int productId = productTable.getSelectionModel()
+                .selectedItemProperty()
+                .getValue()
+                .getProductId();
+        Map<String, Object> map = new HashMap<>();
+        map.put("productId", productId);
+        Runner.sendData(new ClientRequest("deleteProduct", map));
+        ServerResponse response = Runner.getData();
+        if (response.isError()) {
+            Alert alert = new Alert(ERROR, "Произошла ошибка при удалении товара!");
+            alert.show();
         }
     }
 
