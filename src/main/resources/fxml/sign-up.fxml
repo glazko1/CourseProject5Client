@@ -66,7 +66,7 @@
             <Font name="Georgia" size="17.0" />
         </font>
     </Button>
-   <Button fx:id="index" layoutX="188.0" layoutY="24.0" mnemonicParsing="false" style="-fx-background-color: black;" text="Мебельная фабрика" textFill="WHITE">
+   <Button fx:id="index" layoutX="222.0" layoutY="25.0" mnemonicParsing="false" style="-fx-background-color: black;" text="Электротовары" textFill="WHITE">
       <font>
          <Font name="Georgia" size="30.0" />
       </font>

@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -41,12 +42,12 @@
                <Font name="Georgia" size="20.0" />
             </font>
          </Text>
-         <Text fx:id="price" fill="RED" layoutX="387.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="230.0">
+         <Text fx:id="price" fill="RED" layoutX="421.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="230.0">
             <font>
                <Font name="Georgia" size="30.0" />
             </font>
          </Text>
-         <Button fx:id="toBasket" layoutX="528.0" layoutY="248.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="В корзину">
+         <Button fx:id="toBasket" layoutX="550.0" layoutY="248.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="В корзину">
             <font>
                <Font name="Georgia" size="20.0" />
             </font>
@@ -96,6 +97,8 @@
                </CheckBox>
             </children>
          </AnchorPane>
+         <RadioButton fx:id="rubles" layoutX="355.0" layoutY="252.0" mnemonicParsing="false" selected="true" text="BYR" />
+         <RadioButton fx:id="dollars" layoutX="355.0" layoutY="272.0" mnemonicParsing="false" text="USD" />
       </children>
     </AnchorPane>
     <Button fx:id="basket" layoutX="58.0" layoutY="36.0" mnemonicParsing="false" text="Корзина">

@@ -48,6 +48,10 @@ public class IndexController {
             signIn.getScene().getWindow().hide();
             SceneChanger.getInstance().changeScene("/fxml/sign-up.fxml");
         });
+        forgotPassword.setOnAction(event -> {
+            forgotPassword.getScene().getWindow().hide();
+            SceneChanger.getInstance().changeScene("/fxml/restore-password.fxml");
+        });
     }
 
     private void processSignIn() {

@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UsersController">
     <AnchorPane layoutY="100.0" prefHeight="300.0" prefWidth="700.0" style="-fx-background-color: white;">
-            <TableView fx:id="userTable" layoutX="5.0" layoutY="68.0" prefHeight="226.0" prefWidth="690.0">
+            <TableView fx:id="userTable" layoutX="5.0" layoutY="39.0" prefHeight="255.0" prefWidth="690.0">
                 <columns>
                     <TableColumn fx:id="usernameColumn" prefWidth="115.0" text="Логин" />
                     <TableColumn fx:id="nameColumn" prefWidth="115.0" text="Имя" />
@@ -19,50 +19,40 @@
                <TableColumn fx:id="bannedColumn" prefWidth="95.0" text="Заблокирован" />
                 </columns>
             </TableView>
-            <Button fx:id="ban" layoutX="400.0" layoutY="4.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="Заблокировать">
+            <Button fx:id="ban" layoutX="61.0" layoutY="4.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="Заблокировать">
                 <font>
                     <Font name="Georgia" size="14.0" />
                 </font>
             </Button>
-            <Button fx:id="changeToAdmin" layoutX="240.0" layoutY="36.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="127.0" style="-fx-background-color: #f39c63;" text="Администратор">
+            <Button fx:id="changeToAdmin" layoutX="378.0" layoutY="4.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="127.0" style="-fx-background-color: #f39c63;" text="Администратор">
                 <font>
                     <Font name="Georgia" size="14.0" />
                 </font>
             </Button>
-            <Button fx:id="refresh" layoutX="180.0" layoutY="4.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="Обновить">
-                <font>
-                    <Font name="Georgia" size="14.0" />
-                </font>
-            </Button>
-         <Button fx:id="changeToExpert" layoutX="410.0" layoutY="36.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="Эксперт">
+         <Button fx:id="changeToUser" layoutX="530.0" layoutY="4.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="Пользователь">
             <font>
                <Font name="Georgia" size="14.0" />
             </font>
          </Button>
-         <Button fx:id="changeToUser" layoutX="530.0" layoutY="36.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="Пользователь">
-            <font>
-               <Font name="Georgia" size="14.0" />
-            </font>
-         </Button>
-         <Text layoutX="50.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Изменить статус на:">
+         <Text layoutX="199.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Изменить статус на:">
             <font>
                <Font name="Georgia" size="17.0" />
             </font>
          </Text>
     </AnchorPane>
-    <Button fx:id="back" layoutX="63.0" layoutY="36.0" mnemonicParsing="false" text="Назад">
-        <font>
-            <Font name="Georgia" size="17.0" />
-        </font>
-    </Button>
-    <Button fx:id="logout" layoutX="563.0" layoutY="36.0" mnemonicParsing="false" text="Выход">
-        <font>
-            <Font name="Georgia" size="17.0" />
-        </font>
-    </Button>
-    <Button fx:id="main" layoutX="188.0" layoutY="24.0" mnemonicParsing="false" style="-fx-background-color: black;" text="Мебельная фабрика" textFill="WHITE">
-        <font>
-            <Font name="Georgia" size="30.0" />
-        </font>
-    </Button>
+   <Button fx:id="basket" layoutX="58.0" layoutY="36.0" mnemonicParsing="false" text="Корзина">
+      <font>
+         <Font name="Georgia" size="17.0" />
+      </font>
+   </Button>
+   <Button fx:id="back" layoutX="563.0" layoutY="36.0" mnemonicParsing="false" text="Назад">
+      <font>
+         <Font name="Georgia" size="17.0" />
+      </font>
+   </Button>
+   <Button fx:id="main" layoutX="222.0" layoutY="25.0" mnemonicParsing="false" style="-fx-background-color: black;" text="Электротовары" textFill="WHITE">
+      <font>
+         <Font name="Georgia" size="30.0" />
+      </font>
+   </Button>
 </AnchorPane>

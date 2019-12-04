@@ -22,6 +22,11 @@
                     <Font name="Georgia" size="14.0" />
                 </font>
             </Button>
+         <Button fx:id="cancelOrder" layoutX="134.0" layoutY="8.0" mnemonicParsing="false" style="-fx-background-color: #f39c63;" text="Отменить">
+            <font>
+               <Font name="Georgia" size="14.0" />
+            </font>
+         </Button>
         </children>
     </AnchorPane>
     <Button fx:id="basket" layoutX="58.0" layoutY="36.0" mnemonicParsing="false" text="Корзина">

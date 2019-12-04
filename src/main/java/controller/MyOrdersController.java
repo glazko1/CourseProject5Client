@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -26,6 +27,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static javafx.scene.control.Alert.AlertType.ERROR;
 
 public class MyOrdersController {
 
@@ -48,6 +51,9 @@ public class MyOrdersController {
     private Button orderInfo;
 
     @FXML
+    private Button cancelOrder;
+
+    @FXML
     private Button basket;
 
     @FXML
@@ -63,6 +69,11 @@ public class MyOrdersController {
     private void initialize() {
         fillOrderTable();
         orderInfo.setOnAction(event -> showOrderDetails());
+        cancelOrder.setVisible(false);
+        cancelOrder.setOnAction(event -> {
+            cancelOrder();
+            fillOrderTable();
+        });
         basket.setOnAction(event -> {
             basket.getScene().getWindow().hide();
             SceneChanger.getInstance().changeScene("/fxml/basket.fxml");
@@ -75,6 +86,18 @@ public class MyOrdersController {
             main.getScene().getWindow().hide();
             SceneChanger.getInstance().changeScene("/fxml/main.fxml");
         });
+    }
+
+    private void cancelOrder() {
+        int orderId = orderTable.getSelectionModel().getSelectedItem().getOrderId();
+        Map<String, Object> data = new HashMap<>();
+        data.put("orderId", orderId);
+        Runner.sendData(new ClientRequest("cancelOrder", data));
+        ServerResponse response = Runner.getData();
+        if (response.isError()) {
+            Alert alert = new Alert(ERROR, "Произошла ошибка!");
+            alert.show();
+        }
     }
 
     private void showOrderDetails() {
@@ -121,5 +144,14 @@ public class MyOrdersController {
                     cellData.getValue().getAddress().getHouse() + "-" +
                     cellData.getValue().getAddress().getFlat()));
         sumColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getOrderSum()).asObject());
+        orderTable.getSelectionModel()
+                .selectedItemProperty()
+                .addListener((observable, oldValue, newValue) -> {
+                    if (newValue.getOrderStatus().getStatusId() == 2) {
+                        cancelOrder.setVisible(false);
+                    } else {
+                        cancelOrder.setVisible(true);
+                    }
+                });
     }
 }

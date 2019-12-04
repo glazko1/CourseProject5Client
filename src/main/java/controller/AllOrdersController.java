@@ -134,6 +134,10 @@ public class AllOrdersController {
                         cellData.getValue().getAddress().getHouse() + "-" +
                         cellData.getValue().getAddress().getFlat()));
         sumColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getOrderSum()).asObject());
+        showButtons(null);
+        orderTable.getSelectionModel()
+                .selectedItemProperty()
+                .addListener((observable, oldValue, newValue) -> showButtons(newValue));
     }
 
     private void processOrder() {
@@ -148,6 +152,20 @@ public class AllOrdersController {
         } else {
             Alert alert = new Alert(ERROR, "Произошла ошибка!");
             alert.show();
+        }
+    }
+
+    private void showButtons(OrderProperty orderProperty) {
+        if (orderProperty == null) {
+            orderInfo.setVisible(false);
+            processOrder.setVisible(false);
+        } else {
+            orderInfo.setVisible(true);
+            if ("В обработке".equals(orderProperty.getOrderStatus().getStatusName())) {
+                processOrder.setVisible(true);
+            } else {
+                processOrder.setVisible(false);
+            }
         }
     }
 }

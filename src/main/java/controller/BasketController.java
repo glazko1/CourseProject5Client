@@ -7,10 +7,7 @@ import entity.property.ProductProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
@@ -55,6 +52,12 @@ public class BasketController {
     private Button remove;
 
     @FXML
+    private RadioButton rubles;
+
+    @FXML
+    private RadioButton dollars;
+
+    @FXML
     private Button back;
 
     @FXML
@@ -63,9 +66,13 @@ public class BasketController {
     @FXML
     private Button makeOrder;
 
+    @FXML
+    private Text discount;
+
     private List<Product> products;
     private Map<ProductProperty, Integer> productProperties;
     private MapParser parser = MapParser.getInstance();
+    private boolean priceInRubles = true;
 
     @FXML
     private void initialize() {
@@ -77,6 +84,20 @@ public class BasketController {
         }
         add.setOnAction(event -> addProduct());
         remove.setOnAction(event -> removeProduct());
+        rubles.selectedProperty().addListener(((observable, oldValue, newValue) -> {
+            if (newValue) {
+                dollars.setSelected(false);
+                priceInRubles = true;
+                fillProductTable();
+            }
+        }));
+        dollars.selectedProperty().addListener(((observable, oldValue, newValue) -> {
+            if (newValue) {
+                rubles.setSelected(false);
+                priceInRubles = false;
+                fillProductTable();
+            }
+        }));
         back.setOnAction(event -> {
             back.getScene().getWindow().hide();
             SceneChanger.getInstance().changeScene("/fxml/main.fxml");
@@ -127,15 +148,36 @@ public class BasketController {
                 .selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> showProductDetails(newValue));
         productTable.refresh();
-        sum.setText(String.format("%.2f", products.stream().mapToDouble(Product::getPrice).sum()));
+        double totalSum = products.stream().mapToDouble(Product::getPrice).sum();
+        if (totalSum >= 500) {
+            discount.setText("Скидка 10%");
+            totalSum *= 0.9;
+        } else if (totalSum >= 200) {
+            discount.setText("Скидка 5%");
+            totalSum *= 0.95;
+        } else {
+            discount.setText("");
+        }
+        if (priceInRubles) {
+            sum.setText(String.format("%.2f р.", totalSum));
+        } else {
+            sum.setText(String.format("$%.2f", totalSum / 2.1));
+        }
     }
 
     private void showProductDetails(ProductProperty productProperty) {
         if (productProperty != null) {
             name.setText(productProperty.getProductName());
-            price.setText(String.format("%.2f", productProperty.getPrice()));
+            double productPrice = productProperty.getPrice();
+            if (priceInRubles) {
+                price.setText(String.format("%.2f р.", productPrice));
+            } else {
+                price.setText(String.format("$%.2f", productPrice / 2.1));
+            }
             image.setImage(new Image(productProperty.getImagePath()));
-            add.setVisible(true);
+            if (productProperty.getAmount() > productProperties.get(productProperty)) {
+                add.setVisible(true);
+            }
             remove.setVisible(true);
         } else {
             name.setText("");

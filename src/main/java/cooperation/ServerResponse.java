@@ -7,14 +7,17 @@ public class ServerResponse {
 
     private Map<String, Object> data;
     private boolean error;
+    private String errorMessage;
 
     public ServerResponse() {
         this.data = new HashMap<>();
+        this.errorMessage = "";
     }
 
-    public ServerResponse(Map<String, Object> data, boolean error) {
+    public ServerResponse(Map<String, Object> data, boolean error, String errorMessage) {
         this.data = data;
         this.error = error;
+        this.errorMessage = errorMessage;
     }
 
     public Map<String, Object> getData() {
@@ -35,5 +38,13 @@ public class ServerResponse {
 
     public void setError(boolean error) {
         this.error = error;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 }

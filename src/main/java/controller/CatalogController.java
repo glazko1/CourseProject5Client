@@ -85,6 +85,12 @@ public class CatalogController {
     private CheckBox category5;
 
     @FXML
+    private RadioButton rubles;
+
+    @FXML
+    private RadioButton dollars;
+
+    @FXML
     private Button basket;
 
     @FXML
@@ -97,6 +103,7 @@ public class CatalogController {
     private List<Product> products;
     private List<String> departments = new ArrayList<>();
     private MapParser parser = MapParser.getInstance();
+    private boolean priceInRubles = true;
 
     @FXML
     private void initialize() {
@@ -119,6 +126,20 @@ public class CatalogController {
         priceMax.valueProperty().addListener((observable, oldValue, newValue) -> countFilteredProducts(newValue.doubleValue()));
         categories.setOnAction(event -> editCategoriesPane());
         filter.setOnAction(event -> filterProducts(priceMax.getValue()));
+        rubles.selectedProperty().addListener(((observable, oldValue, newValue) -> {
+            if (newValue) {
+                dollars.setSelected(false);
+                priceInRubles = true;
+                fillProductTable();
+            }
+        }));
+        dollars.selectedProperty().addListener(((observable, oldValue, newValue) -> {
+            if (newValue) {
+                rubles.setSelected(false);
+                priceInRubles = false;
+                fillProductTable();
+            }
+        }));
         basket.setOnAction(event -> {
             basket.getScene().getWindow().hide();
             SceneChanger.getInstance().changeScene("/fxml/basket.fxml");
@@ -150,7 +171,14 @@ public class CatalogController {
         productTable.setItems(FXCollections.observableArrayList(productProperties));
         nameColumn.setCellValueFactory(cellData -> cellData.getValue().productNameProperty());
         departmentColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDepartment().getDepartmentName()));
-        priceColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getPrice()).asObject());
+        priceColumn.setCellValueFactory(cellData -> {
+            double price = cellData.getValue().getPrice();
+            if (!priceInRubles) {
+                price /= 2.1;
+                price = (double) Math.round(price * 100) / 100;
+            }
+            return new SimpleDoubleProperty(price).asObject();
+        });
         showProductDetails(null);
         productTable.getSelectionModel()
                 .selectedItemProperty()
@@ -162,7 +190,12 @@ public class CatalogController {
             name.setText(productProperty.getProductName());
             image.setImage(new Image(productProperty.getImagePath()));
             if (productProperty.getAmount() > 0) {
-                price.setText(String.format("%.2f", productProperty.getPrice()));
+                double productPrice = productProperty.getPrice();
+                if (priceInRubles) {
+                    price.setText(String.format("%.2f р.", productPrice));
+                } else {
+                    price.setText(String.format("$%.2f", productPrice / 2.1));
+                }
                 toBasket.setVisible(true);
             } else {
                 price.setText("Нет в наличии");
@@ -211,7 +244,13 @@ public class CatalogController {
 
     private void countFilteredProducts(double price) {
         int number = (int) products.stream()
-                .filter(product -> product.getPrice() < price)
+                .filter(product -> {
+                    if (priceInRubles) {
+                        return product.getPrice() < price;
+                    } else {
+                        return product.getPrice() < 2.1 * price;
+                    }
+                })
                 .filter(product -> {
                     if (!departments.isEmpty()) {
                         return departments.contains(product.getDepartment().getDepartmentName());
@@ -225,7 +264,13 @@ public class CatalogController {
     private void filterProducts(double price) {
         List<ProductProperty> productProperties = new ArrayList<>();
         products.stream()
-                .filter(product -> product.getPrice() < price)
+                .filter(product -> {
+                    if (priceInRubles) {
+                        return product.getPrice() < price;
+                    } else {
+                        return product.getPrice() < 2.1 * price;
+                    }
+                })
                 .filter(product -> {
                     if (!departments.isEmpty()) {
                         return departments.contains(product.getDepartment().getDepartmentName());

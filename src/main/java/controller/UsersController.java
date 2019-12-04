@@ -53,19 +53,13 @@ public class UsersController {
     private Button changeToAdmin;
 
     @FXML
-    private Button refresh;
-
-    @FXML
-    private Button changeToExpert;
-
-    @FXML
     private Button changeToUser;
 
     @FXML
-    private Button back;
+    private Button basket;
 
     @FXML
-    private Button logout;
+    private Button back;
 
     @FXML
     private Button main;
@@ -76,14 +70,25 @@ public class UsersController {
     @FXML
     private void initialize() {
         fillUserTable();
-        ban.setOnAction(event -> changeBanStatus());
-        refresh.setOnAction(event -> getUsers());
-        changeToAdmin.setOnAction(event -> changeUserStatus(1));
-        changeToExpert.setOnAction(event -> changeUserStatus(2));
-        changeToUser.setOnAction(event -> changeUserStatus(3));
+        ban.setOnAction(event -> {
+            changeBanStatus();
+            fillUserTable();
+        });
+        changeToAdmin.setOnAction(event -> {
+            changeUserStatus(1);
+            fillUserTable();
+        });
+        changeToUser.setOnAction(event -> {
+            changeUserStatus(2);
+            fillUserTable();
+        });
         main.setOnAction(event -> {
             main.getScene().getWindow().hide();
             SceneChanger.getInstance().changeScene("/fxml/main.fxml");
+        });
+        basket.setOnAction(event -> {
+            basket.getScene().getWindow().hide();
+            SceneChanger.getInstance().changeScene("/fxml/basket.fxml");
         });
         back.setOnAction(event -> {
             back.getScene().getWindow().hide();
@@ -144,7 +149,7 @@ public class UsersController {
         int userId = user.getUserId();
         Map<String, Object> data = new HashMap<>();
         data.put("userId", userId);
-        data.put("status", status);
+        data.put("statusId", status);
         Runner.sendData(new ClientRequest("changeUserStatus", data));
         ServerResponse response = Runner.getData();
         if (!response.isError()) {
@@ -167,18 +172,15 @@ public class UsersController {
             if ("Администратор".equals(user.getUserStatus().getStatusName())) {
                 ban.setVisible(false);
                 changeToAdmin.setVisible(false);
-                changeToExpert.setVisible(false);
                 changeToUser.setVisible(false);
             } else {
                 ban.setVisible(true);
                 changeToAdmin.setVisible(true);
-                changeToExpert.setVisible(true);
                 changeToUser.setVisible(false);
             }
         } else {
             ban.setVisible(false);
             changeToAdmin.setVisible(false);
-            changeToExpert.setVisible(false);
             changeToUser.setVisible(false);
         }
     }

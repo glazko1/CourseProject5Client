@@ -125,7 +125,7 @@ public class SignUpController {
                 Alert alert = new Alert(INFORMATION, "Регистрация прошла успешно! Теперь вы можете войти в систему.");
                 alert.show();
             } else {
-                Alert alert = new Alert(ERROR, "Информация некорректна!");
+                Alert alert = new Alert(ERROR, response.getErrorMessage());
                 alert.show();
             }
         } else {
